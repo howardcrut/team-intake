@@ -4571,7 +4571,8 @@ select.in { min-height: 46px; }
     }
     catch (e) { storageOk = false; }
     /* A link can carry the code: ...#ISRAEL27 */
-    if (!got) { try { var hc = String(location.hash || '').slice(1).toUpperCase(); if (hc && CODES[hc]) { setCode(hc); codeMsg = null; } } catch (e2) {} }
+    /* It is used on a first visit, and on a later visit as long as no code is set and nothing is answered yet. */
+    if (!state.code && !hasAnswers()) { try { var hc = String(location.hash || '').slice(1).toUpperCase().replace(/[^A-Z0-9]/g, ''); if (hc && CODES[hc]) { setCode(hc); codeMsg = null; } } catch (e2) {} }
     applyLang(); render();
   }
 
